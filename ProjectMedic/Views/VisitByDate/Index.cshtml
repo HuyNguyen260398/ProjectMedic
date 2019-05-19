@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_CustomerLayout2.cshtml";
+}
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+<div id='calender'></div>
+
+@section Scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            GenerateCalender();
+
+            function GenerateCalender() {
+                $('#calender').fullCalendar('destroy');
+                $('#calender').fullCalendar({
+                    selectable: true,
+                    contentHeight: 500,
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'today',
+                        center: 'prev title next',
+                        right: ''
+                    },
+                    eventLimit: false,
+                    editable: true,
+                    displayEventTime: false,
+                    eventTextColor: 'white',
+
+                    dayClick: function (date) {
+                        if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+                            // This allows today and future date
+                            $.ajax({
+                                type: 'GET',
+                                url: '/VisitByDate/GetDate',
+                                data: { date: date.format(), dayofweek: date.day() },
+                                success: function () {
+                                    window.location.href = '@Url.Action("SelectMedicalSpecialty", "VisitByDate")';
+                                },
+                                error: function () {
+                                    alert('fail')
+                                }
+                            })
+                        } else {
+                            // Else part is for past dates
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+}

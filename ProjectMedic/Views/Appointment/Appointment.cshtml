@@ -1,0 +1,131 @@
+﻿@using ProjectMedic.Models
+@model List<Appointment>
+@{
+    ViewBag.Title = "Appointment";
+    Layout = "~/Views/Layout/_CustomerLayout2.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>Medical Specialty</th>
+        <th>Date</th>
+        <th>Doctor</th>
+        <th>Room</th>
+        <th>Expense</th>
+        <th></th>
+    </tr>
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Medical_Specialty</td>
+                <td>@item.Date</td>
+                <td>@item.Doctor</td>
+                <td>@item.Room</td>
+                <td>$ @String.Format("{0:0,0}", item.Price)</td>
+                <td>
+                    <a href=@Url.Action("DeleteAppointment", "Appointment", new { appId = item.Appointment_ID })>
+                        <span class="fa fa-trash">&nbsp;&nbsp;</span> Cancel
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6" style="text-align: left; color: #007BFF">
+                There are no appointments!
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4" style="text-align:left">
+            <a href=@Url.Action("SelectMedicalSpecialty", "VisitByDate") class="btn btn-primary"><span class="fas fa-file-medical">&nbsp;&nbsp;</span>Add More Specialties</a>
+        </td>
+        <td colspan="2" style="text-align: right">
+            <a href=@Url.Action("Payment", "Appointment") class="btn btn-primary">Check Out</a>
+        </td>
+    </tr>
+</table>
+<table class="table">
+
+    @{ 
+        var patient = (ProjectMedic.Models.Patient)ViewBag.Patient;
+    }
+
+    <tr>
+        <th colspan="8">Patient Info</th>
+    </tr>
+    <tr style="border-bottom:hidden">
+        <td colspan="2">
+            <span class="fas fa-user">&nbsp;&nbsp;</span>Fullname:
+        </td>
+        <td colspan="2">
+            @String.Concat(patient.Patient_Firstname, " ", patient.Patient_Lastname)
+        </td>
+        <td colspan="2">
+            <span class="fas fa-venus-mars">&nbsp;&nbsp;</span>Gender:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Gender
+        </td>
+    </tr>
+    <tr style="border-bottom:hidden">
+        <td colspan="2">
+            <span class="far fa-calendar-alt">&nbsp;&nbsp;</span>Date of Birth:
+        </td>
+        <td colspan="2">
+            @patient.Patient_DoB.Value.ToShortDateString()
+        </td>
+        <td colspan="2">
+            <span class="fas fa-id-card">&nbsp;&nbsp;</span>ID Card Number:
+        </td>
+        <td colspan="2">
+            @patient.Patient_IDCardNumber
+        </td>
+    </tr>
+    <tr style="border-bottom:hidden">
+        <td colspan="2">
+            <span class="fas fa-globe">&nbsp;&nbsp;</span>Nationality:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Nationality
+        </td>
+        <td colspan="2">
+            <span class="fas fa-users">&nbsp;&nbsp;</span>Ethnic:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Ethnic
+        </td>
+    </tr>
+    <tr style="border-bottom:hidden">
+        <td colspan="2">
+            <span class="fas fa-mobile-alt">&nbsp;&nbsp;</span>Phone:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Phone
+        </td>
+        <td colspan="2">
+            <span class="fas fa-envelope">&nbsp;&nbsp;</span>Email:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Email
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <span class="fas fa-map-marked-alt">&nbsp;&nbsp;</span>Address:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Address
+        </td>
+        <td colspan="2">
+            <span class="fas fa-briefcase">&nbsp;&nbsp;</span>Occupation:
+        </td>
+        <td colspan="2">
+            @patient.Patient_Occupation
+        </td>
+    </tr>
+</table>

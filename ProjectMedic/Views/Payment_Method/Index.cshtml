@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProjectMedic.Models.Payment_Method>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod_Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentMethod_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentMethod_Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PaymentMethod_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PaymentMethod_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PaymentMethod_ID })
+        </td>
+    </tr>
+}
+
+</table>

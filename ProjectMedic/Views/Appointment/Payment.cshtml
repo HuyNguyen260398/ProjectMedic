@@ -1,0 +1,70 @@
+﻿
+@model ProjectMedic.Models.Medical_Invoice
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Layout/_CustomerLayout2.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <table class="table">
+                    <tr><td style="border-bottom:hidden"><h4>Choose a Medical Insurance type</h4></td></tr>
+                    <tr><td style="border-bottom:hidden">@Html.DropDownList("bhyt", (IEnumerable<SelectListItem>)ViewBag.BHYT, htmlAttributes: new { @class = "form-control" })</td></tr>
+                    @if (ViewBag.Message1 != null)
+                    {
+                        <tr><td style="border-bottom:hidden"></td></tr>
+                        <tr><td style="border-bottom:hidden"><span style="color:red">@ViewBag.Message1</span></td></tr>
+                    }
+                    <tr><td style="border-bottom:hidden"></td></tr>
+                    <tr><td style="border-bottom:hidden"><h4>Select payment method</h4></td></tr>
+                    @foreach (var item in (List<ProjectMedic.Models.Payment_Method>)ViewBag.Payment)
+                    {
+                        <tr>
+                            <td style="border-bottom:hidden">
+                                @Html.RadioButtonFor(model => model.PaymentMethod_ID, item.PaymentMethod_ID)
+                                <span>&nbsp;&nbsp;</span><text><span class="fas fa-id-card">&nbsp;&nbsp;</span>@item.PaymentMethod_Name</text>
+                            </td>
+                        </tr>
+                    }
+                    @if (ViewBag.Message2 != null)
+                    {
+                        <tr><td style="border-bottom:hidden"></td></tr>
+                        <tr><td style="border-bottom:hidden"><span style="color:red">@ViewBag.Message2</span></td></tr>
+                    }
+                    @if (ViewBag.Message3 != null)
+                    {
+                        <tr><td style="border-bottom:hidden"></td></tr>
+                        <tr><td style="border-bottom:hidden"><span style="color:green">@ViewBag.Message3</span></td></tr>
+                    }
+                    <tr style="border-bottom: 2px solid #007BFF"><td></td></tr>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <div class="container-fluid">
+                    <div class="col-lg-12">
+
+                        @Html.Action("AppointmentList", "Appointment")
+
+                        @Html.HiddenFor(model => model.Patient_ID, new { Value = Session["P_ID"] })
+                        @Html.HiddenFor(model => model.MedicalInvoice_Date, new { Value = DateTime.Now.ToShortDateString() })
+                        @Html.HiddenFor(model => model.MedicalInvoice_Cost, new { Value = Session["Payment"] })
+
+                        <table class="table">
+                            <tr><td style="text-align: right; border-bottom:hidden">Total Expense: $ @String.Format("{0:0,0}", Session["Payment"])Đ</td></tr>
+                            <tr><td style="text-align: right">Services Expense: None</td></tr>
+                            <tr><td style="border-top: 1px dotted #007BFF;border-bottom:hidden; text-align: right"><b>TOTAL: $ @String.Format("{0:0,0}", Session["Payment"])</b></td></tr>
+                            <tr><td style="text-align: right"><input type="submit" value="Submit Purchase" class="btn btn-primary" /></td></tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

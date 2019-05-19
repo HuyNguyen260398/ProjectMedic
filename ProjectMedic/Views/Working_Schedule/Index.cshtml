@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProjectMedic.Models.Working_Schedule>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Schedule List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThemeColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFullDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor.Doctor_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Working_Day.WorkingDay_Period)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Working_Room.WorkingRoom_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Working_Time.WoringTime_Period)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThemeColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFullDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor.Doctor_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Working_Day.WorkingDay_Period)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Working_Room.WorkingRoom_Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Working_Time.WoringTime_Period)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkingSchedule_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkingSchedule_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkingSchedule_ID })
+        </td>
+    </tr>
+}
+
+</table>

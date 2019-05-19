@@ -1,0 +1,91 @@
+﻿@model ProjectMedic.Models.Working_Schedule
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Working_Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThemeColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThemeColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFullDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFullDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.Doctor_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Doctor_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Working_Day.WorkingDay_Period)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Working_Day.WorkingDay_Period)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Working_Room.WorkingRoom_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Working_Room.WorkingRoom_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Working_Time.WoringTime_Period)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Working_Time.WoringTime_Period)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkingSchedule_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

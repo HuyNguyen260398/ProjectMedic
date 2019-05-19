@@ -1,0 +1,35 @@
+﻿@model ProjectMedic.Models.Medical_Specialty
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Medical_Specialty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicalSpecialty_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicalSpecialty_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicalSpecialty_ServicePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicalSpecialty_ServicePrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MedicalSpecialty_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

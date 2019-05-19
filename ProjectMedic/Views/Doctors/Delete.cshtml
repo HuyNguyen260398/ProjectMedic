@@ -1,0 +1,54 @@
+﻿@model ProjectMedic.Models.Doctor
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<div>
+    <h4>Are you sure you want to delete this?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor_Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor_Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Academic_Title.AcademicTitle_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Academic_Title.AcademicTitle_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medical_Specialty.MedicalSpecialty_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medical_Specialty.MedicalSpecialty_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+        <a href=@Url.Action("Index","Doctors") class="btn btn-default">Back to List</a>
+    </div>
+    }
+</div>

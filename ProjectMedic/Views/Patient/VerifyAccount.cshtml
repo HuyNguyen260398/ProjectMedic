@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "VerifyAccount";
+    Layout = "~/Views/Layout/_CustomerLayout1.cshtml";
+}
+
+<section class="home-slider inner-page owl-carousel" id="contact-banner">
+    <div class="slider-item" style="background-image: url('../../Template/Medic/img/slider-2.jpg')">
+        <div class="container">
+            <div class="row slider-text align-items-center">
+                <div class="col-md-7 col-sm-12 element-animate">
+                    <h1>Registration</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-5 element-animate">
+                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+                {
+                    <strong style="color:green">Congratulation!</strong><p style="color:green"> Your account has been successful activated! Click here to @Html.ActionLink("Sign In", "SignIn", "Patient")</p>
+                }
+                else
+                {
+                    <strong style="color:red">Error!</strong><p style="color:red"> @ViewBag.Message</p>
+                }
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 element-animate">
+
+                <h5 class="text-uppercase mb-3">Address</h5>
+                <p class="mb-5">609-611 Au Co Street,<br>Phu Trung Ward, Tan Phu Distric,<br>HCM City</p>
+
+                <h5 class="text-uppercase mb-3">Website</h5>
+                <p class="mb-5">
+                    <a href="http://benhvientanphu.vn">tanphuhospital.vn</a>
+
+                    <h5 class="text-uppercase mb-3">Contact</h5>
+                <p class="mb-5">Phone: 38 65 79 48 - 54 088 924 <br> Support: 54 088 928 <br> Hotline: 0966 37 10 10</p>
+
+            </div>
+        </div>
+    </div>
+</section>

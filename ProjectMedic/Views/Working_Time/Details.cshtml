@@ -1,0 +1,27 @@
+﻿@model ProjectMedic.Models.Working_Time
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Working_Time</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WoringTime_Period)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WoringTime_Period)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkingTime_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

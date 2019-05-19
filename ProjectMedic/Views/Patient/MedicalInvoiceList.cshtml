@@ -1,0 +1,100 @@
+﻿@model PagedList.IPagedList<ProjectMedic.Models.vInvoice>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "MedicalInvoiceList";
+    Layout = "~/Views/Layout/_CustomerLayout1.cshtml";
+}
+
+<link href="/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    int i = 0;
+}
+
+<section class="home-slider inner-page owl-carousel" id="contact-banner">
+    <div class="slider-item" style="background-image: url('../../Template/Medic/img/slider-2.jpg')">
+        <div class="container">
+            <div class="row slider-text align-items-center">
+                <div class="col-md-7 col-sm-12 element-animate">
+                    <h1>My Appointments</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-light custom-tabs">
+    <div class="container" style="margin-left:100px; margin-right:100px">
+        <table class="table" style="border: 2px solid #007BFF">
+            <tr>
+                <th style="background-color:#007BFF;color:white">ID</th>
+                <th style="background-color:#007BFF;color:white">Date</th>
+                <th style="background-color:#007BFF;color:white">Cost</th>
+                <th style="background-color:#007BFF;color:white">Payment Method</th>
+                <th style="background-color:#007BFF;color:white">Invoice Status</th>
+                <th style="background-color:#007BFF;color:white">Payment Status</th>
+                <th style="background-color:#007BFF;color:white"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                i = i + 1;
+                <tr>
+                    <td>@item.MedicalInvoice_ID</td>
+                    <td>@(item.MedicalInvoice_Date.Value.ToShortDateString())</td>
+                    <td>$ @String.Format("{0:0,0}", item.MedicalInvoice_Cost)</td>
+                    <td>@item.PaymentMethod_Name</td>
+                    <td>@item.Invoice_Status</td>
+                    <td>@item.Payment_Status</td>
+                    <td>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04" style="margin-left:-70px">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#@i" class="dropdown-item">Details</a>
+                            <a href=@Url.Action("CancelAppointment","Patient", new { id = item.MedicalInvoice_ID}) class="dropdown-item">Cancel</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="border-top: hidden">
+                        <div id="@i" class="panel-collapse collapse" style="margin-top:10px">
+                            <div class="panel-body" style="margin:10px">
+                                @foreach (var a in (List<ProjectMedic.Models.vAppointment>)ViewBag.ListApp)
+                                {
+                                    if (a.MedicalInvoice_ID == item.MedicalInvoice_ID)
+                                    {
+                                        <table class="table table-borderless" style="border: 2px solid #007BFF">
+                                            <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@a.MedicalSpecialty_Name</td></tr>
+                                            <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@String.Concat(a.Start.Value.ToShortDateString(), " - ", a.WorkingDay_Period, " - ", a.WoringTime_Period)</td></tr>
+                                            <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@a.Doctor_Name</td></tr>
+                                            <tr><td><span class="fas fa-id-card">&nbsp;&nbsp;</span>Room @a.WorkingRoom_Number</td></tr>
+                                            <tr><td style="text-align: right"><span class="fas fa-id-card">&nbsp;&nbsp;</span>$ @String.Format("{0:0,0}", a.MedicalSpecialty_ServicePrice)</td></tr>
+                                        </table>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+
+        <h6 style="color:#007BFF">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</h6>
+
+        @Html.PagedListPager(Model, page_no => Url.Action("MedicalInvoiceList", new
+        {
+            page_no
+        }),
+                                                        new PagedListRenderOptions
+                                                        {
+                                                            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                                                            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                                                            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                                            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                                            MaximumPageNumbersToDisplay = 3
+                                                        })
+    </div>
+</section>
+
+

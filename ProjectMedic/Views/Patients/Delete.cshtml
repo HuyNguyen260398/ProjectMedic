@@ -1,0 +1,137 @@
+﻿@model ProjectMedic.Models.Patient
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Ethnic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Ethnic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_IDCardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_IDCardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEmailVerified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEmailVerified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActivationCode)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

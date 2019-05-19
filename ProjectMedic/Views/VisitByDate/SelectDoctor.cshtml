@@ -1,0 +1,41 @@
+﻿@model List<ProjectMedic.Models.vDoctor>
+
+@{
+    ViewBag.Title = "SeclectDoctor";
+    Layout = "~/Views/Layout/_CustomerLayout2.cshtml";
+}
+
+@{
+    int i = 0;
+    Random rd = new Random();
+}
+
+<div class="panel-group" id="accordion">
+
+    @foreach (var item in Model)
+    {
+        i = i + 1;
+        int room = rd.Next(1, 42);
+        <div class="panel panel-default" style="border: 2px solid #007BFF; padding:10px; margin-bottom:20px; background-color:white; box-shadow: 5px 10px 18px #888888">
+            <div class="panel-heading">
+                <label>Doctor: @item.AcademicTitle_Code @item.Doctor_Name</label><br />
+                <label>Gender: @item.Doctor_Gender</label><br />
+                <label>Medical Specialty: @item.MedicalSpecialty_Name</label><br />
+                <label>Room: <span>0</span>@room</label>
+                <a data-toggle="collapse" data-parent="#accordion" href="#@i" class="btn btn-primary" style="margin-left:785px; width:150px">Select</a>
+            </div>
+            <div id="@i" class="panel-collapse collapse" style="border-top: 2px dotted #007BFF; margin-left: -10px; margin-right: -10px; margin-top:10px">
+                <div class="panel-body" style="margin:10px">
+                    @using (Html.BeginForm("AddSchedule", "Appointment", new { @ms = item.MedicalSpecialty_Name, @dt = item.Doctor_Name, @dt_id = item.Doctor_ID, @ro = room }))
+                    {
+                        <label>Choose Visit Time</label>
+                        @Html.DropDownList("ddl", (IEnumerable<SelectListItem>)ViewBag.WT, htmlAttributes: new { @class = "form-control" })
+                        <button type="submit" class="btn btn-primary" style="margin-left:785px; width:150px; margin-top:10px">Continue</button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+

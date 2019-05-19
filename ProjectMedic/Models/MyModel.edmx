@@ -1,0 +1,1005 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MediPlusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Academic_Title">
+          <Key>
+            <PropertyRef Name="AcademicTitle_ID" />
+          </Key>
+          <Property Name="AcademicTitle_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AcademicTitle_Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="AcademicTitle_Means" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Password" Type="varchar" MaxLength="50" />
+          <Property Name="Admin_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="Admin_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin_Phone" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Doctor_ID" />
+          </Key>
+          <Property Name="Doctor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Doctor_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Doctor_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="AcademicTitle_ID" Type="int" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medical_Invoice">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_ID" Type="int" Nullable="false" />
+          <Property Name="MedicalInvoice_Date" Type="date" />
+          <Property Name="MedicalInvoice_Cost" Type="float" />
+          <Property Name="PaymentMethod_ID" Type="int" Nullable="false" />
+          <Property Name="Invoice_Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Payment_Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Medical_Invoice_Detail">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="int" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="int" Nullable="false" />
+          <Property Name="WorkingSchedule_ID" Type="int" Nullable="false" />
+          <Property Name="HealthInsuranceStatus" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Medical_Specialty">
+          <Key>
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalSpecialty_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedicalSpecialty_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MedicalSpecialty_ServicePrice" Type="float" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Patient_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Password" Type="varchar" MaxLength="50" />
+          <Property Name="Patient_DoB" Type="date" />
+          <Property Name="Patient_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="Patient_Ethnic" Type="nvarchar" MaxLength="20" />
+          <Property Name="Patient_Nationality" Type="nvarchar" MaxLength="20" />
+          <Property Name="Patient_IDCardNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Patient_Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Patient_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsEmailVerified" Type="bit" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Payment_Method">
+          <Key>
+            <PropertyRef Name="PaymentMethod_ID" />
+          </Key>
+          <Property Name="PaymentMethod_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentMethod_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod_Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Working_Day">
+          <Key>
+            <PropertyRef Name="WorkingDay_ID" />
+          </Key>
+          <Property Name="WorkingDay_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkingDay_Period" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Working_Room">
+          <Key>
+            <PropertyRef Name="WorkingRoom_ID" />
+          </Key>
+          <Property Name="WorkingRoom_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkingRoom_Number" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Working_Schedule">
+          <Key>
+            <PropertyRef Name="WorkingSchedule_ID" />
+          </Key>
+          <Property Name="WorkingSchedule_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Doctor_ID" Type="int" Nullable="false" />
+          <Property Name="WorkingTime_ID" Type="int" Nullable="false" />
+          <Property Name="WorkingDay_ID" Type="int" Nullable="false" />
+          <Property Name="WorkingRoom_ID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" />
+        </EntityType>
+        <EntityType Name="Working_Time">
+          <Key>
+            <PropertyRef Name="WorkingTime_ID" />
+          </Key>
+          <Property Name="WorkingTime_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WoringTime_Period" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MediPlus.dbo.vAppointment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vAppointment">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="int" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="int" Nullable="false" />
+          <Property Name="Patient_Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="MedicalSpecialty_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcademicTitle_Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Doctor_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="WorkingDay_Period" Type="nvarchar" MaxLength="50" />
+          <Property Name="WoringTime_Period" Type="nvarchar" MaxLength="20" />
+          <Property Name="WorkingRoom_Number" Type="nvarchar" MaxLength="10" />
+          <Property Name="MedicalSpecialty_ServicePrice" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MediPlus.dbo.vDoctor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vDoctor">
+          <Key>
+            <PropertyRef Name="Doctor_ID" />
+          </Key>
+          <Property Name="Doctor_ID" Type="int" Nullable="false" />
+          <Property Name="Doctor_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Doctor_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="AcademicTitle_Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="MedicalSpecialty_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MediPlus.dbo.vInvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vInvoice">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="int" Nullable="false" />
+          <Property Name="Patient_ID" Type="int" Nullable="false" />
+          <Property Name="Patient_Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patient_Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="MedicalInvoice_Date" Type="date" />
+          <Property Name="MedicalInvoice_Cost" Type="float" />
+          <Property Name="PaymentMethod_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Invoice_Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Payment_Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_MI_PM">
+          <End Role="Payment_Method" Type="Self.Payment_Method" Multiplicity="1" />
+          <End Role="Medical_Invoice" Type="Self.Medical_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_Method">
+              <PropertyRef Name="PaymentMethod_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice">
+              <PropertyRef Name="PaymentMethod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Doctor_AT">
+          <End Role="Academic_Title" Type="Self.Academic_Title" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic_Title">
+              <PropertyRef Name="AcademicTitle_ID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="AcademicTitle_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Doctor_MS">
+          <End Role="Medical_Specialty" Type="Self.Medical_Specialty" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Specialty">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MI_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Medical_Invoice" Type="Self.Medical_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice">
+              <PropertyRef Name="Patient_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_MI">
+          <End Role="Medical_Invoice" Type="Self.Medical_Invoice" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Invoice">
+              <PropertyRef Name="MedicalInvoice_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="MedicalInvoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_MS">
+          <End Role="Medical_Specialty" Type="Self.Medical_Specialty" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Specialty">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_WS">
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Schedule">
+              <PropertyRef Name="WorkingSchedule_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="WorkingSchedule_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Doctor_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="Doctor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WD">
+          <End Role="Working_Day" Type="Self.Working_Day" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Day">
+              <PropertyRef Name="WorkingDay_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingDay_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WR">
+          <End Role="Working_Room" Type="Self.Working_Room" Multiplicity="0..1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Room">
+              <PropertyRef Name="WorkingRoom_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingRoom_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WT">
+          <End Role="Working_Time" Type="Self.Working_Time" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Time">
+              <PropertyRef Name="WorkingTime_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingTime_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediPlusModelStoreContainer">
+          <EntitySet Name="Academic_Title" EntityType="Self.Academic_Title" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medical_Invoice" EntityType="Self.Medical_Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medical_Invoice_Detail" EntityType="Self.Medical_Invoice_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medical_Specialty" EntityType="Self.Medical_Specialty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_Method" EntityType="Self.Payment_Method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Working_Day" EntityType="Self.Working_Day" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Working_Room" EntityType="Self.Working_Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Working_Schedule" EntityType="Self.Working_Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Working_Time" EntityType="Self.Working_Time" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vAppointment" EntityType="Self.vAppointment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vAppointment].[MedicalInvoice_ID] AS [MedicalInvoice_ID], 
+    [vAppointment].[MedicalSpecialty_ID] AS [MedicalSpecialty_ID], 
+    [vAppointment].[Patient_Username] AS [Patient_Username], 
+    [vAppointment].[MedicalSpecialty_Name] AS [MedicalSpecialty_Name], 
+    [vAppointment].[AcademicTitle_Code] AS [AcademicTitle_Code], 
+    [vAppointment].[Doctor_Name] AS [Doctor_Name], 
+    [vAppointment].[Start] AS [Start], 
+    [vAppointment].[WorkingDay_Period] AS [WorkingDay_Period], 
+    [vAppointment].[WoringTime_Period] AS [WoringTime_Period], 
+    [vAppointment].[WorkingRoom_Number] AS [WorkingRoom_Number], 
+    [vAppointment].[MedicalSpecialty_ServicePrice] AS [MedicalSpecialty_ServicePrice]
+    FROM [dbo].[vAppointment] AS [vAppointment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vDoctor" EntityType="Self.vDoctor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vDoctor].[Doctor_ID] AS [Doctor_ID], 
+    [vDoctor].[Doctor_Name] AS [Doctor_Name], 
+    [vDoctor].[Doctor_Gender] AS [Doctor_Gender], 
+    [vDoctor].[AcademicTitle_Code] AS [AcademicTitle_Code], 
+    [vDoctor].[MedicalSpecialty_Name] AS [MedicalSpecialty_Name]
+    FROM [dbo].[vDoctor] AS [vDoctor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vInvoice" EntityType="Self.vInvoice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vInvoice].[MedicalInvoice_ID] AS [MedicalInvoice_ID], 
+    [vInvoice].[Patient_ID] AS [Patient_ID], 
+    [vInvoice].[Patient_Firstname] AS [Patient_Firstname], 
+    [vInvoice].[Patient_Lastname] AS [Patient_Lastname], 
+    [vInvoice].[MedicalInvoice_Date] AS [MedicalInvoice_Date], 
+    [vInvoice].[MedicalInvoice_Cost] AS [MedicalInvoice_Cost], 
+    [vInvoice].[PaymentMethod_Name] AS [PaymentMethod_Name], 
+    [vInvoice].[Invoice_Status] AS [Invoice_Status], 
+    [vInvoice].[Payment_Status] AS [Payment_Status]
+    FROM [dbo].[vInvoice] AS [vInvoice]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_MI_PM" Association="Self.FK_MI_PM">
+            <End Role="Payment_Method" EntitySet="Payment_Method" />
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Doctor_AT" Association="Self.PK_Doctor_AT">
+            <End Role="Academic_Title" EntitySet="Academic_Title" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Doctor_MS" Association="Self.PK_Doctor_MS">
+            <End Role="Medical_Specialty" EntitySet="Medical_Specialty" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MI_Patient" Association="Self.PK_MI_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_MI" Association="Self.PK_MID_MI">
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_MS" Association="Self.PK_MID_MS">
+            <End Role="Medical_Specialty" EntitySet="Medical_Specialty" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_WS" Association="Self.PK_MID_WS">
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_Doctor" Association="Self.PK_WS_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WD" Association="Self.PK_WS_WD">
+            <End Role="Working_Day" EntitySet="Working_Day" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WR" Association="Self.PK_WS_WR">
+            <End Role="Working_Room" EntitySet="Working_Room" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WT" Association="Self.PK_WS_WT">
+            <End Role="Working_Time" EntitySet="Working_Time" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediPlusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Academic_Title">
+          <Key>
+            <PropertyRef Name="AcademicTitle_ID" />
+          </Key>
+          <Property Name="AcademicTitle_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AcademicTitle_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicTitle_Means" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="Self.PK_Doctor_AT" FromRole="Academic_Title" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Admin_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Doctor_ID" />
+          </Key>
+          <Property Name="Doctor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Doctor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctor_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicTitle_ID" Type="Int32" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Academic_Title" Relationship="Self.PK_Doctor_AT" FromRole="Doctor" ToRole="Academic_Title" />
+          <NavigationProperty Name="Medical_Specialty" Relationship="Self.PK_Doctor_MS" FromRole="Doctor" ToRole="Medical_Specialty" />
+          <NavigationProperty Name="Working_Schedule" Relationship="Self.PK_WS_Doctor" FromRole="Doctor" ToRole="Working_Schedule" />
+        </EntityType>
+        <EntityType Name="Medical_Invoice">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="MedicalInvoice_Date" Type="DateTime" Precision="0" />
+          <Property Name="MedicalInvoice_Cost" Type="Double" />
+          <NavigationProperty Name="Patient" Relationship="Self.PK_MI_Patient" FromRole="Medical_Invoice" ToRole="Patient" />
+          <NavigationProperty Name="Medical_Invoice_Detail" Relationship="Self.PK_MID_MI" FromRole="Medical_Invoice" ToRole="Medical_Invoice_Detail" />
+          <Property Name="PaymentMethod_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Payment_Method" Relationship="MediPlusModel.FK_MI_PM" FromRole="Medical_Invoice" ToRole="Payment_Method" />
+          <Property Name="Invoice_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Medical_Invoice_Detail">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkingSchedule_ID" Type="Int32" Nullable="false" />
+          <Property Name="HealthInsuranceStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Medical_Invoice" Relationship="Self.PK_MID_MI" FromRole="Medical_Invoice_Detail" ToRole="Medical_Invoice" />
+          <NavigationProperty Name="Medical_Specialty" Relationship="Self.PK_MID_MS" FromRole="Medical_Invoice_Detail" ToRole="Medical_Specialty" />
+          <NavigationProperty Name="Working_Schedule" Relationship="Self.PK_MID_WS" FromRole="Medical_Invoice_Detail" ToRole="Working_Schedule" />
+        </EntityType>
+        <EntityType Name="Medical_Specialty">
+          <Key>
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalSpecialty_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedicalSpecialty_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalSpecialty_ServicePrice" Type="Double" />
+          <NavigationProperty Name="Doctors" Relationship="Self.PK_Doctor_MS" FromRole="Medical_Specialty" ToRole="Doctor" />
+          <NavigationProperty Name="Medical_Invoice_Detail" Relationship="Self.PK_MID_MS" FromRole="Medical_Specialty" ToRole="Medical_Invoice_Detail" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_DoB" Type="DateTime" Precision="0" />
+          <Property Name="Patient_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Ethnic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_IDCardNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailVerified" Type="Boolean" />
+          <Property Name="ActivationCode" Type="Guid" />
+          <NavigationProperty Name="Medical_Invoice" Relationship="Self.PK_MI_Patient" FromRole="Patient" ToRole="Medical_Invoice" />
+          <Property Name="Patient_Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Working_Day">
+          <Key>
+            <PropertyRef Name="WorkingDay_ID" />
+          </Key>
+          <Property Name="WorkingDay_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkingDay_Period" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Working_Schedule" Relationship="Self.PK_WS_WD" FromRole="Working_Day" ToRole="Working_Schedule" />
+        </EntityType>
+        <EntityType Name="Working_Room">
+          <Key>
+            <PropertyRef Name="WorkingRoom_ID" />
+          </Key>
+          <Property Name="WorkingRoom_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkingRoom_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Working_Schedule" Relationship="Self.PK_WS_WR" FromRole="Working_Room" ToRole="Working_Schedule" />
+        </EntityType>
+        <EntityType Name="Working_Schedule">
+          <Key>
+            <PropertyRef Name="WorkingSchedule_ID" />
+          </Key>
+          <Property Name="WorkingSchedule_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Doctor_ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkingTime_ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkingDay_ID" Type="Int32" Nullable="false" />
+          <Property Name="WorkingRoom_ID" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.PK_WS_Doctor" FromRole="Working_Schedule" ToRole="Doctor" />
+          <NavigationProperty Name="Medical_Invoice_Detail" Relationship="Self.PK_MID_WS" FromRole="Working_Schedule" ToRole="Medical_Invoice_Detail" />
+          <NavigationProperty Name="Working_Day" Relationship="Self.PK_WS_WD" FromRole="Working_Schedule" ToRole="Working_Day" />
+          <NavigationProperty Name="Working_Room" Relationship="Self.PK_WS_WR" FromRole="Working_Schedule" ToRole="Working_Room" />
+          <NavigationProperty Name="Working_Time" Relationship="Self.PK_WS_WT" FromRole="Working_Schedule" ToRole="Working_Time" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Working_Time">
+          <Key>
+            <PropertyRef Name="WorkingTime_ID" />
+          </Key>
+          <Property Name="WorkingTime_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WoringTime_Period" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Working_Schedule" Relationship="Self.PK_WS_WT" FromRole="Working_Time" ToRole="Working_Schedule" />
+        </EntityType>
+        <Association Name="PK_Doctor_AT">
+          <End Role="Academic_Title" Type="Self.Academic_Title" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic_Title">
+              <PropertyRef Name="AcademicTitle_ID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="AcademicTitle_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Doctor_MS">
+          <End Role="Medical_Specialty" Type="Self.Medical_Specialty" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Specialty">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Doctor_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="Doctor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MI_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Medical_Invoice" Type="Self.Medical_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice">
+              <PropertyRef Name="Patient_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_MI">
+          <End Role="Medical_Invoice" Type="Self.Medical_Invoice" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Invoice">
+              <PropertyRef Name="MedicalInvoice_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="MedicalInvoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_MS">
+          <End Role="Medical_Specialty" Type="Self.Medical_Specialty" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medical_Specialty">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="MedicalSpecialty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_MID_WS">
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="1" />
+          <End Role="Medical_Invoice_Detail" Type="Self.Medical_Invoice_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Schedule">
+              <PropertyRef Name="WorkingSchedule_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice_Detail">
+              <PropertyRef Name="WorkingSchedule_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WD">
+          <End Role="Working_Day" Type="Self.Working_Day" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Day">
+              <PropertyRef Name="WorkingDay_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingDay_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WR">
+          <End Role="Working_Room" Type="Self.Working_Room" Multiplicity="0..1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Room">
+              <PropertyRef Name="WorkingRoom_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingRoom_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_WS_WT">
+          <End Role="Working_Time" Type="Self.Working_Time" Multiplicity="1" />
+          <End Role="Working_Schedule" Type="Self.Working_Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Working_Time">
+              <PropertyRef Name="WorkingTime_ID" />
+            </Principal>
+            <Dependent Role="Working_Schedule">
+              <PropertyRef Name="WorkingTime_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MediPlusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Academic_Title" EntityType="Self.Academic_Title" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Medical_Invoice" EntityType="Self.Medical_Invoice" />
+          <EntitySet Name="Medical_Invoice_Detail" EntityType="Self.Medical_Invoice_Detail" />
+          <EntitySet Name="Medical_Specialty" EntityType="Self.Medical_Specialty" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Working_Day" EntityType="Self.Working_Day" />
+          <EntitySet Name="Working_Room" EntityType="Self.Working_Room" />
+          <EntitySet Name="Working_Schedule" EntityType="Self.Working_Schedule" />
+          <EntitySet Name="Working_Time" EntityType="Self.Working_Time" />
+          <AssociationSet Name="PK_Doctor_AT" Association="Self.PK_Doctor_AT">
+            <End Role="Academic_Title" EntitySet="Academic_Title" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Doctor_MS" Association="Self.PK_Doctor_MS">
+            <End Role="Medical_Specialty" EntitySet="Medical_Specialty" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_Doctor" Association="Self.PK_WS_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MI_Patient" Association="Self.PK_MI_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_MI" Association="Self.PK_MID_MI">
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_MS" Association="Self.PK_MID_MS">
+            <End Role="Medical_Specialty" EntitySet="Medical_Specialty" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_MID_WS" Association="Self.PK_MID_WS">
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+            <End Role="Medical_Invoice_Detail" EntitySet="Medical_Invoice_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WD" Association="Self.PK_WS_WD">
+            <End Role="Working_Day" EntitySet="Working_Day" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WR" Association="Self.PK_WS_WR">
+            <End Role="Working_Room" EntitySet="Working_Room" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="PK_WS_WT" Association="Self.PK_WS_WT">
+            <End Role="Working_Time" EntitySet="Working_Time" />
+            <End Role="Working_Schedule" EntitySet="Working_Schedule" />
+          </AssociationSet>
+          <EntitySet Name="vDoctors" EntityType="MediPlusModel.vDoctor" />
+          <EntitySet Name="Payment_Method" EntityType="MediPlusModel.Payment_Method" />
+          <AssociationSet Name="FK_MI_PM" Association="MediPlusModel.FK_MI_PM">
+            <End Role="Payment_Method" EntitySet="Payment_Method" />
+            <End Role="Medical_Invoice" EntitySet="Medical_Invoice" />
+          </AssociationSet>
+          <EntitySet Name="vInvoices" EntityType="MediPlusModel.vInvoice" />
+          <EntitySet Name="vAppointments" EntityType="MediPlusModel.vAppointment" />
+        </EntityContainer>
+        <EntityType Name="vDoctor">
+          <Key>
+            <PropertyRef Name="Doctor_ID" />
+          </Key>
+          <Property Name="Doctor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Doctor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctor_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicTitle_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalSpecialty_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Payment_Method">
+          <Key>
+            <PropertyRef Name="PaymentMethod_ID" />
+          </Key>
+          <Property Name="PaymentMethod_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethod_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Medical_Invoice" Relationship="MediPlusModel.FK_MI_PM" FromRole="Payment_Method" ToRole="Medical_Invoice" />
+        </EntityType>
+        <Association Name="FK_MI_PM">
+          <End Type="MediPlusModel.Payment_Method" Role="Payment_Method" Multiplicity="1" />
+          <End Type="MediPlusModel.Medical_Invoice" Role="Medical_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_Method">
+              <PropertyRef Name="PaymentMethod_ID" />
+            </Principal>
+            <Dependent Role="Medical_Invoice">
+              <PropertyRef Name="PaymentMethod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vInvoice">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalInvoice_Date" Type="DateTime" Precision="0" />
+          <Property Name="MedicalInvoice_Cost" Type="Double" />
+          <Property Name="PaymentMethod_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Invoice_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vAppointment">
+          <Key>
+            <PropertyRef Name="MedicalInvoice_ID" />
+            <PropertyRef Name="MedicalSpecialty_ID" />
+          </Key>
+          <Property Name="MedicalInvoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="MedicalSpecialty_ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalSpecialty_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicTitle_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Doctor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="WorkingDay_Period" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WoringTime_Period" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="WorkingRoom_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalSpecialty_ServicePrice" Type="Double" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MediPlusModelStoreContainer" CdmEntityContainer="MediPlusEntities">
+          <EntitySetMapping Name="Academic_Title">
+            <EntityTypeMapping TypeName="MediPlusModel.Academic_Title">
+              <MappingFragment StoreEntitySet="Academic_Title">
+                <ScalarProperty Name="AcademicTitle_ID" ColumnName="AcademicTitle_ID" />
+                <ScalarProperty Name="AcademicTitle_Code" ColumnName="AcademicTitle_Code" />
+                <ScalarProperty Name="AcademicTitle_Means" ColumnName="AcademicTitle_Means" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="MediPlusModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+                <ScalarProperty Name="Admin_Firstname" ColumnName="Admin_Firstname" />
+                <ScalarProperty Name="Admin_Lastname" ColumnName="Admin_Lastname" />
+                <ScalarProperty Name="Admin_Username" ColumnName="Admin_Username" />
+                <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+                <ScalarProperty Name="Admin_Gender" ColumnName="Admin_Gender" />
+                <ScalarProperty Name="Admin_Email" ColumnName="Admin_Email" />
+                <ScalarProperty Name="Admin_Phone" ColumnName="Admin_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="MediPlusModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="Doctor_Name" ColumnName="Doctor_Name" />
+                <ScalarProperty Name="Doctor_Gender" ColumnName="Doctor_Gender" />
+                <ScalarProperty Name="AcademicTitle_ID" ColumnName="AcademicTitle_ID" />
+                <ScalarProperty Name="MedicalSpecialty_ID" ColumnName="MedicalSpecialty_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medical_Invoice">
+            <EntityTypeMapping TypeName="MediPlusModel.Medical_Invoice">
+              <MappingFragment StoreEntitySet="Medical_Invoice">
+                <ScalarProperty Name="Payment_Status" ColumnName="Payment_Status" />
+                <ScalarProperty Name="Invoice_Status" ColumnName="Invoice_Status" />
+                <ScalarProperty Name="PaymentMethod_ID" ColumnName="PaymentMethod_ID" />
+                <ScalarProperty Name="MedicalInvoice_ID" ColumnName="MedicalInvoice_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="MedicalInvoice_Date" ColumnName="MedicalInvoice_Date" />
+                <ScalarProperty Name="MedicalInvoice_Cost" ColumnName="MedicalInvoice_Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medical_Invoice_Detail">
+            <EntityTypeMapping TypeName="MediPlusModel.Medical_Invoice_Detail">
+              <MappingFragment StoreEntitySet="Medical_Invoice_Detail">
+                <ScalarProperty Name="MedicalInvoice_ID" ColumnName="MedicalInvoice_ID" />
+                <ScalarProperty Name="MedicalSpecialty_ID" ColumnName="MedicalSpecialty_ID" />
+                <ScalarProperty Name="WorkingSchedule_ID" ColumnName="WorkingSchedule_ID" />
+                <ScalarProperty Name="HealthInsuranceStatus" ColumnName="HealthInsuranceStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medical_Specialty">
+            <EntityTypeMapping TypeName="MediPlusModel.Medical_Specialty">
+              <MappingFragment StoreEntitySet="Medical_Specialty">
+                <ScalarProperty Name="MedicalSpecialty_ID" ColumnName="MedicalSpecialty_ID" />
+                <ScalarProperty Name="MedicalSpecialty_Name" ColumnName="MedicalSpecialty_Name" />
+                <ScalarProperty Name="MedicalSpecialty_ServicePrice" ColumnName="MedicalSpecialty_ServicePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="MediPlusModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Patient_Occupation" ColumnName="Patient_Occupation" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Patient_Firstname" ColumnName="Patient_Firstname" />
+                <ScalarProperty Name="Patient_Lastname" ColumnName="Patient_Lastname" />
+                <ScalarProperty Name="Patient_Username" ColumnName="Patient_Username" />
+                <ScalarProperty Name="Patient_Password" ColumnName="Patient_Password" />
+                <ScalarProperty Name="Patient_DoB" ColumnName="Patient_DoB" />
+                <ScalarProperty Name="Patient_Gender" ColumnName="Patient_Gender" />
+                <ScalarProperty Name="Patient_Ethnic" ColumnName="Patient_Ethnic" />
+                <ScalarProperty Name="Patient_Nationality" ColumnName="Patient_Nationality" />
+                <ScalarProperty Name="Patient_IDCardNumber" ColumnName="Patient_IDCardNumber" />
+                <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+                <ScalarProperty Name="Patient_Email" ColumnName="Patient_Email" />
+                <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Working_Day">
+            <EntityTypeMapping TypeName="MediPlusModel.Working_Day">
+              <MappingFragment StoreEntitySet="Working_Day">
+                <ScalarProperty Name="WorkingDay_ID" ColumnName="WorkingDay_ID" />
+                <ScalarProperty Name="WorkingDay_Period" ColumnName="WorkingDay_Period" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Working_Room">
+            <EntityTypeMapping TypeName="MediPlusModel.Working_Room">
+              <MappingFragment StoreEntitySet="Working_Room">
+                <ScalarProperty Name="WorkingRoom_ID" ColumnName="WorkingRoom_ID" />
+                <ScalarProperty Name="WorkingRoom_Number" ColumnName="WorkingRoom_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Working_Schedule">
+            <EntityTypeMapping TypeName="MediPlusModel.Working_Schedule">
+              <MappingFragment StoreEntitySet="Working_Schedule">
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WorkingSchedule_ID" ColumnName="WorkingSchedule_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="WorkingTime_ID" ColumnName="WorkingTime_ID" />
+                <ScalarProperty Name="WorkingDay_ID" ColumnName="WorkingDay_ID" />
+                <ScalarProperty Name="WorkingRoom_ID" ColumnName="WorkingRoom_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Working_Time">
+            <EntityTypeMapping TypeName="MediPlusModel.Working_Time">
+              <MappingFragment StoreEntitySet="Working_Time">
+                <ScalarProperty Name="WorkingTime_ID" ColumnName="WorkingTime_ID" />
+                <ScalarProperty Name="WoringTime_Period" ColumnName="WoringTime_Period" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vDoctors">
+            <EntityTypeMapping TypeName="MediPlusModel.vDoctor">
+              <MappingFragment StoreEntitySet="vDoctor">
+                <ScalarProperty Name="MedicalSpecialty_Name" ColumnName="MedicalSpecialty_Name" />
+                <ScalarProperty Name="AcademicTitle_Code" ColumnName="AcademicTitle_Code" />
+                <ScalarProperty Name="Doctor_Gender" ColumnName="Doctor_Gender" />
+                <ScalarProperty Name="Doctor_Name" ColumnName="Doctor_Name" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_Method">
+            <EntityTypeMapping TypeName="MediPlusModel.Payment_Method">
+              <MappingFragment StoreEntitySet="Payment_Method">
+                <ScalarProperty Name="PaymentMethod_Description" ColumnName="PaymentMethod_Description" />
+                <ScalarProperty Name="PaymentMethod_Name" ColumnName="PaymentMethod_Name" />
+                <ScalarProperty Name="PaymentMethod_ID" ColumnName="PaymentMethod_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vInvoices">
+            <EntityTypeMapping TypeName="MediPlusModel.vInvoice">
+              <MappingFragment StoreEntitySet="vInvoice">
+                <ScalarProperty Name="Payment_Status" ColumnName="Payment_Status" />
+                <ScalarProperty Name="Invoice_Status" ColumnName="Invoice_Status" />
+                <ScalarProperty Name="PaymentMethod_Name" ColumnName="PaymentMethod_Name" />
+                <ScalarProperty Name="MedicalInvoice_Cost" ColumnName="MedicalInvoice_Cost" />
+                <ScalarProperty Name="MedicalInvoice_Date" ColumnName="MedicalInvoice_Date" />
+                <ScalarProperty Name="Patient_Lastname" ColumnName="Patient_Lastname" />
+                <ScalarProperty Name="Patient_Firstname" ColumnName="Patient_Firstname" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="MedicalInvoice_ID" ColumnName="MedicalInvoice_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vAppointments">
+            <EntityTypeMapping TypeName="MediPlusModel.vAppointment">
+              <MappingFragment StoreEntitySet="vAppointment">
+                <ScalarProperty Name="MedicalSpecialty_ServicePrice" ColumnName="MedicalSpecialty_ServicePrice" />
+                <ScalarProperty Name="WorkingRoom_Number" ColumnName="WorkingRoom_Number" />
+                <ScalarProperty Name="WoringTime_Period" ColumnName="WoringTime_Period" />
+                <ScalarProperty Name="WorkingDay_Period" ColumnName="WorkingDay_Period" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Doctor_Name" ColumnName="Doctor_Name" />
+                <ScalarProperty Name="AcademicTitle_Code" ColumnName="AcademicTitle_Code" />
+                <ScalarProperty Name="MedicalSpecialty_Name" ColumnName="MedicalSpecialty_Name" />
+                <ScalarProperty Name="Patient_Username" ColumnName="Patient_Username" />
+                <ScalarProperty Name="MedicalSpecialty_ID" ColumnName="MedicalSpecialty_ID" />
+                <ScalarProperty Name="MedicalInvoice_ID" ColumnName="MedicalInvoice_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,62 @@
+﻿@model ProjectMedic.Models.vInvoice
+
+@{
+    ViewBag.Title = "EditAppointment";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h4>Appointment Info</h4>
+
+<table class="table" style="border-bottom:2px solid #007BFF">
+    <tr>
+        <td>Patient Fullname: @String.Concat(Model.Patient_Firstname, " ", Model.Patient_Lastname)</td>
+        <td>Payment Method: @Model.PaymentMethod_Name</td>
+    </tr>
+    <tr>
+        <td style="border-top:hidden">Booking Date: @Model.MedicalInvoice_Date.Value.ToShortDateString()</td>
+        <td style="border-top:hidden">Invoice Status: @Model.Invoice_Status</td>
+    </tr>
+    <tr>
+        <td style="border-top:hidden">Expense: $ @Model.MedicalInvoice_Cost</td>
+        <td style="border-top:hidden">Payment Status: @Model.Payment_Status</td>
+    </tr>
+</table>
+<br />
+<a data-toggle="collapse" href="#edit" class="dropdown-item btn btn-default">Edit</a>
+<br />
+<h4>Appointment Details</h4>
+<table class="table">
+    <tr>
+        <th>Medical Specialty</th>
+        <th>Doctor Name</th>
+        <th>Visit Date</th>
+        <th>Room Number</th>
+        <th>Service Price</th>
+    </tr>
+    @foreach (var item in (List<ProjectMedic.Models.vAppointment>)ViewBag.ListApp)
+    {
+        <tr>
+            <td>@item.MedicalSpecialty_Name</td>
+            <td>@item.Doctor_Name</td>
+            <td>@item.Start.Value.ToShortDateString()</td>
+            <td>@item.WorkingRoom_Number</td>
+            <td>$ @item.MedicalSpecialty_ServicePrice</td>
+        </tr>
+    }
+</table>
+<br />
+<div id="edit" class="panel-collapse collapse" style="margin-top:10px">
+    <div class="panel-body" style="margin:10px">
+        @using (Html.BeginForm("EditAppointment","Patients", FormMethod.Post, new { @id = Model.MedicalInvoice_ID}))
+        {
+            
+        <table class="table table-borderless">
+            <tr>
+                <td>@Html.DropDownList("ddl2", (IEnumerable<SelectListItem>)ViewBag.IS, htmlAttributes: new { @class = "form-control" })</td>
+                <td>@Html.DropDownList("ddl3", (IEnumerable<SelectListItem>)ViewBag.PS, htmlAttributes: new { @class = "form-control" })</td>
+                <td><input type="submit" value="Save" class="form-control btn btn-primary btn-sm" /></td>
+            </tr>
+        </table>
+        }
+    </div>
+</div>

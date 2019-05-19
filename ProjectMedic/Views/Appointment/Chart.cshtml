@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+        #chart_container {
+            width: auto;
+            height: 300px;
+            padding: 1px;
+            border-radius: 4px;
+            text-align:center;
+        }
+    </style>
+
+<div class="container-fluid" style="background-color:burlywood">
+    <canvas id="chartcanvas"></canvas>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Chart.min.js"></script>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>*@
+
+    <script>
+            var repArray = @Html.Raw(Json.Encode(ViewBag.REP));
+            var ms = @Html.Raw(Json.Encode(ViewBag.MS));
+
+            var ctx = $("#chartcanvas");
+            var bacchart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ms,
+                    datasets: [{
+                        label: "Medical Specialty Statistic",
+                        data: repArray,
+                        backgroundColor: [
+                            "#f38b4a",
+                            "#56d798",
+                            "#ff8397",
+                            "#6970d5"
+                        ],
+                        borderWidth: 2,
+                    }]
+                },
+                options:
+                    {
+                        title:
+                            {
+                                display: true,
+                                text: "ProductWise Sales Count"
+                            },
+                        responsive: true,
+                        maintainAspectRatio: true
+                    }
+            })
+        </script>
+
+    @*<script>
+
+        var PieChartData =
+            {
+                labels: [@Html.Raw(ViewBag.MS)],
+                datasets: [{
+                    label: 'ProductWise Sales Count',
+                    backgroundColor: [
+                        "#f990a7",
+                        "#aad2ed",
+                        "#9966FF",
+                        "#99e5e5",
+                        "#f7bd83",
+                    ],
+                    borderWidth: 2,
+                    data: [@Html.Raw(ViewBag.REP)]
+                }]
+            };
+
+            window.onload = function () {
+                var ctx1 = document.getElementById("chartcanvas").getContext("2d");
+                window.myBar = new Chart(ctx1,
+                    {
+                        type: 'pie',
+                        data: PieChartData,
+                        options:
+                            {
+                                title:
+                                {
+                                    display: true,
+                                    text: "ProductWise Sales Count"
+                                },
+                                responsive: true,
+                                maintainAspectRatio: true
+                            }
+                    });
+            }
+    </script>*@
+
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ProjectMedic.Models.Working_Room>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkingRoom_Number)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkingRoom_Number)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkingRoom_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkingRoom_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkingRoom_ID })
+        </td>
+    </tr>
+}
+
+</table>

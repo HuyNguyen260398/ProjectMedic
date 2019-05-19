@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<ProjectMedic.Models.vDoctor>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_CustomerLayout2.cshtml";
+}
+
+<link href="/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    int i = 0;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            No
+        </th>
+        <th>
+            ACADEMIC TITLE
+        </th>
+        <th>
+            DOCTOR
+        </th>
+        <th>
+            GENDER
+        </th>
+        <th>
+            MEDICAL SPECIALTY
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i = i + 1;
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademicTitle_Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor_Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalSpecialty_Name)
+            </td>
+            <td>
+                <a href="@Url.Action("SelectDay", "VisitByDoctor", new { id = item.Doctor_ID })" class="btn btn-primary btn-sm">Select</a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+
+<div class="container-fluid">
+    <h6 style="color:#007BFF">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</h6>
+
+    @Html.PagedListPager(Model, page_no => Url.Action("Index", new
+    {
+        page_no,
+        search = Request.QueryString["search"],
+        ddl1 = Request.QueryString["ddl1"],
+        ddl2 = Request.QueryString["ddl2"],
+        ddl3 = Request.QueryString["ddl3"]
+    }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            MaximumPageNumbersToDisplay = 3
+        })
+</div>

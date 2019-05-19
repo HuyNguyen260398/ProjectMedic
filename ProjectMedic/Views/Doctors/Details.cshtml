@@ -1,0 +1,49 @@
+﻿@model ProjectMedic.Models.Doctor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<div>
+    <h4>Doctor Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor_Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor_Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Academic_Title.AcademicTitle_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Academic_Title.AcademicTitle_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medical_Specialty.MedicalSpecialty_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medical_Specialty.MedicalSpecialty_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href=@Url.Action("Edit","Doctors", new { id = Model.Doctor_ID }) class="btn btn-default">Edit</a>
+    <a href=@Url.Action("Index","Doctors") class="btn btn-default">Back to List</a>
+</p>

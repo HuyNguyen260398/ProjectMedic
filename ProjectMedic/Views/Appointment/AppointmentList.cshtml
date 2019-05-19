@@ -1,0 +1,14 @@
+﻿@using ProjectMedic.Models
+@model List<Appointment>
+
+
+@foreach (var item in Model)
+{
+    <table class="table table-borderless">
+        <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@item.Medical_Specialty</td></tr>
+        <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@item.Date</td></tr>
+        <tr><td style="border-bottom:hidden"><span class="fas fa-id-card">&nbsp;&nbsp;</span>@item.Doctor</td></tr>
+        <tr><td><span class="fas fa-id-card">&nbsp;&nbsp;</span>@item.Room</td></tr>
+        <tr><td style="border-top: 1px dotted #007BFF; text-align: right"><span class="fas fa-id-card">&nbsp;&nbsp;</span>$ @String.Format("{0:0,0}", item.Price)</td></tr>
+    </table>
+}

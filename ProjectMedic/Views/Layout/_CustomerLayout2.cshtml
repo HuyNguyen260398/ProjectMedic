@@ -1,0 +1,313 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Colorlib Medi+</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300, 400, 700">
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/bootstrap.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/custom.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/animate.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/owl.carousel.min.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/bootstrap-datepicker.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/jquery.timepicker.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/fonts/ionicons/css/ionicons.min.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/fonts/fontawesome/css/font-awesome.min.css")>
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/fonts/flaticon/font/flaticon.css")>
+    <link href="~/Template/fontawesome-free-5.5.0-web/css/all.css" rel="stylesheet" />
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href=@Url.Content("~/Template/Medic/css/style.css")>
+</head>
+<body>
+
+    <header role="banner">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-5">
+                        <ul class="social list-unstyled">
+                            <li><a href="#"><span class="fab fa-facebook"></span></a></li>
+                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="account col-md-6 col-sm-6 col-7 text-right">
+                        <ul class="list-unstyled">
+                            <li><a href="#"><span class="fas fa-phone-volume">&nbsp;&nbsp;</span>Technical Support</a></li>
+                            <li><a href="#"><span class="fas fa-phone-volume">&nbsp;&nbsp;</span>Specialty Support</a></li>
+                            @if (Session["P_Username"] != null)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle">@Session["P_Username"]</a>
+                                    <div class="dropdown-menu" id="user_menu">
+                                        <a href=@Url.Action("ViewAccount","Patient") class="dropdown-item"><span class="fas fa-user-alt">&nbsp;&nbsp;</span>My Account</a>
+                                        <a href=@Url.Action("MedicalInvoiceList","Patient") class="dropdown-item"><span class="fas fa-user-alt">&nbsp;&nbsp;</span>My Appointment</a>
+                                        <a href=@Url.Action("SignOut","Patient") class="dropdown-item"><span class="fas fa-sign-out-alt">&nbsp;&nbsp;</span>Sign Out</a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a href=@Url.Action("SignIn", "Patient")><span class="fas fa-sign-in-alt">&nbsp;&nbsp;</span>Sign In</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END header -->
+
+    <div id="header" class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href=@Url.Action("Index","Home")>Medi<span>+</span>  </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExample05">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href=@Url.Action("Index", "Home")>HOME</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href=@Url.Action("Index","VisitByDoctor")>Doctor Appointment</a>
+                                <a class="dropdown-item" href=@Url.Action("Index","VisitByDate")>Date Appointment</a>
+                                <a class="dropdown-item" href="#">User Instructions</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">NEWS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ABOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CONTACT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- END navbar -->
+
+    <div class="container-fluid" id="MainBody">
+        <div class="row" id="AddressBar">
+            <div class="col-lg-3">
+                <a href=@Url.Action("Index","Home") class="btn btn-primary" style="margin-left: -15px"><i class="fa fa-home">&nbsp;&nbsp;Home</i></a>
+            </div>
+            <div class="col-lg-9">
+                @if (Session["action"].ToString() == "selectdoctor")
+                {
+                    <p><strong style="color:#007BFF">Select Doctor >></strong> Select Date >> Appointment List >> Check Out</p>
+                }
+                else if (Session["action"].ToString() == "selectws")
+                {
+                    <p>Select Doctor >><strong style="color:#007BFF"> Select Date >></strong> Appointment List >> Check Out</p>
+                }
+                else if (Session["action"].ToString() == "viewlist")
+                {
+                    <p>Select Doctor >> Select Date >><strong style="color:#007BFF"> Appointment List >></strong> Check Out</p>
+                }
+                else if (Session["action"].ToString() == "checkout")
+                {
+                    <p>Select Doctor >> Select Date >> Appointment List >><strong style="color:#007BFF"> Check Out</strong></p>
+                }
+                else if (Session["action"].ToString() == "selectday")
+                {
+                    <p><strong style="color:#007BFF">Select Date >></strong> Select Medical Specialty >> Select Doctor >> Appointment List >> Check Out</p>
+                }
+                else if (Session["action"].ToString() == "selectms")
+                {
+                    <p>Select Date >><strong style="color:#007BFF"> Select Medical Specialty >></strong> Select Doctor >> Appointment List >> Check Out</p>
+                }
+                else if (Session["action"].ToString() == "getdoctor")
+                {
+                    <p>Select Date >> Select Medical Specialty >><strong style="color:#007BFF"> Select Doctor >></strong> Appointment List >> Check Out</p>
+                }
+            </div>
+        </div>
+        <div class="row" id="RenderBody">
+            <div class="col-lg-3">
+                <div class="container-fluid" id="left_panel">
+                    <div class="row">
+                        <div class="card" id="patient_id">
+                            <div class="card-header" style="background-color: #007BFF">
+                                <h6 style="color:white;text-align:center">Patient Info</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul style="list-style-type:none">
+                                    <li>Fullname: <span style="color:#007BFF">@String.Concat(Session["P_Fname"], " ", Session["P_Lname"])</span></li>
+                                    <li>DoB: <span style="color:#007BFF">@Session["P_DOB"]</span></li>
+                                    <li>Gender: <span style="color:#007BFF">@Session["P_Gender"]</span></li>
+                                    <li>Email: <span style="color:#007BFF">@Session["P_Email"]</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Session["action"].ToString() == "selectdoctor")
+                    {
+                        using (Html.BeginForm("Index", "VisitByDoctor", FormMethod.Get))
+                        {
+                            <div class="row">
+                                <div class="card" id="doctor_filter">
+                                    <div class="card-header" style="background-color:#007BFF">
+                                        <h6>Search Doctor</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <ul style="list-style-type:none">
+                                                <li><label>Doctor Name</label></li>
+                                                <li>@Html.TextBox("search", "", new { @class = "form-control" })</li>
+                                                <li><label>Gender</label></li>
+                                                <li>@Html.DropDownList("ddl1", (IEnumerable<SelectListItem>)ViewBag.Gender, htmlAttributes: new { @class = "form-control" })</li>
+                                                <li><label>Accademy Title</label></li>
+                                                <li>@Html.DropDownList("ddl2", (IEnumerable<SelectListItem>)ViewBag.AcademicTitle, htmlAttributes: new { @class = "form-control" })</li>
+                                                <li><label>Medical Specialty</label></li>
+                                                <li>@Html.DropDownList("ddl3", (IEnumerable<SelectListItem>)ViewBag.MedicalSpecialty, htmlAttributes: new { @class = "form-control" })</li>
+                                                <li><label> </label></li>
+                                                <li><input type="submit" value="Search" class="form-control btn btn-primary" /></li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (Session["action"].ToString() == "selectms")
+                    {
+                        using (Html.BeginForm("SelectMedicalSpecialty", "VisitByDate", FormMethod.Get, new { @date = Session["date"] }))
+                        {
+                            <div class="row">
+                                <div class="card" id="doctor_filter">
+                                    <div class="card-header" style="background-color:#007BFF">
+                                        <h6>Search Medical Specialty</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <ul style="list-style-type:none">
+                                                <li><label>Medical Specialty</label></li>
+                                                <li>@Html.TextBox("search", "", new { @class = "form-control" })</li>
+                                                <li><label> </label></li>
+                                                <li><input type="submit" value="Search" class="form-control btn btn-primary" /></li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (Session["action"].ToString() == "viewlist" || Session["action"].ToString() == "selectws" || Session["action"].ToString() == "selectday")
+                    {
+                        <div class="row">
+                            <div class="card" id="patient_id">
+                                <div class="card-header" style="background-color: #007BFF">
+                                    <h6 style="color:white;text-align:center">Technical Support</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h6 style="text-align:center"><span class="fas fa-phone-volume">&nbsp;&nbsp;</span>0123456789</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card" id="patient_id">
+                                <div class="card-header" style="background-color: #007BFF">
+                                    <h6 style="color:white;text-align:center">Specialty Support</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h6 style="text-align:center"><span class="fas fa-phone-volume">&nbsp;&nbsp;</span>0123456789</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div id="table">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="row mb-5 element-animate">
+                <div class="col-md-3 mb-5">
+                    <h3>Service</h3>
+                    <ul class="footer-link list-unstyled">
+                        <li><a href=@Url.Action("Index","VisitByDoctor")>Doctor Appointment</a></li>
+                        <li><a href=@Url.Action("Index","VisitByDate")>Date Appointment</a></li>
+                        <li><a href="#">User Instructions</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <h3>News</h3>
+                    <ul class="footer-link list-unstyled">
+                        <li><a href="#">News &amp; Press Releases</a></li>
+                        <li><a href="#">Health Care Professional News</a></li>
+                        <li><a href="#">Events &amp; Conferences</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <h3>About</h3>
+                    <ul class="footer-link list-unstyled">
+                        <li><a href="#">About The Hospital</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Accreditations &amp; Awards</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <h3>Contact</h3>
+                    <h4 class="text-uppercase mb-3 h6 text-white">
+                        Address
+                    </h4>
+                    <p class="mb-5">609-611 Au Co Street, Phu Trung Ward, Tan Phu Distric, HCM City</p>
+                    <h4 class="text-uppercase mb-3 h6 text-white">
+                        Website
+                    </h4>
+                    <p class="mb-5"><a href="http://benhvientanphu.vn">tanphuhospital.vn</a></p>
+
+                    <h4 class="text-uppercase mb-3 h6 text-white">
+                        Phone
+                    </h4>
+                    <p>38 657 948 - 54 088 924</p>
+                </div>
+            </div>
+            <div class="row pt-md-3 element-animate">
+                <div class="col-md-12">
+                    <hr class="border-t">
+                </div>
+                <div class="col-md-6 col-sm-12 copyright">
+                    <p>&copy; 2018 Colorlib Medi+. Designed &amp; Developed by <a href="https://colorlib.com/">Colorlib</a></p>
+                </div>
+                <div class="col-md-6 col-sm-12 text-md-right text-sm-left">
+                    <a href="#" class="p-2"><span class="fab fa-facebook"></span></a>
+                    <a href="#" class="p-2"><span class="fab fa-twitter"></span></a>
+                    <a href="#" class="p-2"><span class="fab fa-instagram"></span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END footer -->
+
+    <script src=@Url.Content("~/Template/Medic/js/jquery-3.2.1.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/popper.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/bootstrap.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/owl.carousel.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/bootstrap-datepicker.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/jquery.timepicker.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/jquery.waypoints.min.js")></script>
+    <script src=@Url.Content("~/Template/Medic/js/main.js")></script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

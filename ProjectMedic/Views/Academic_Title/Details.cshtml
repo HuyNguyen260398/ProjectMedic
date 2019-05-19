@@ -1,0 +1,35 @@
+﻿@model ProjectMedic.Models.Academic_Title
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Academic_Title</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AcademicTitle_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcademicTitle_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AcademicTitle_Means)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcademicTitle_Means)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AcademicTitle_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

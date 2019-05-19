@@ -1,0 +1,152 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ProjectMedic.Models.vInvoice>
+
+@{
+    ViewBag.Title = "AllAppointment";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<link href="/Content/PagedList.css" rel="stylesheet" />
+
+<h2>Appointment List</h2>
+
+@using (Html.BeginForm("AllAppointment", "Patients", FormMethod.Get))
+{
+    <table class="table table-borderless">
+        <tr>
+            <td>@Html.TextBox("search", "", new { @style = "width: 95%", @class = "form-control", @placeholder = "patient name..." })</td>
+            <td>@Html.DropDownList("ddl1", (IEnumerable<SelectListItem>)ViewBag.PM, htmlAttributes: new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("ddl2", (IEnumerable<SelectListItem>)ViewBag.IS, htmlAttributes: new { @class = "form-control" })</td>
+            <td>@Html.DropDownList("ddl3", (IEnumerable<SelectListItem>)ViewBag.PS, htmlAttributes: new { @class = "form-control" })</td>
+            <td>@Html.TextBox("date", "", new { @type = "date", @class = "form-control" })</td>
+            <td><input type="submit" value="Search" class="form-control btn btn-primary btn-sm" /></td>
+        </tr>
+    </table>
+}
+
+@if (Model.Count() == 0)
+{
+    <h2>Orders not found!</h2>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Patient Fisrtname
+            </th>
+            <th>
+                @Html.ActionLink("Patient Lastname", "AllAppointment", new
+                {
+                    sort = ViewBag.SortByPatient,
+                    search = Request.QueryString["search"],
+                    ddl1 = Request.QueryString["ddl1"],
+                    ddl2 = Request.QueryString["ddl2"],
+                    ddl3 = Request.QueryString["ddl3"],
+                    date = Request.QueryString["date"]
+                })
+            </th>
+            <th>
+                @Html.ActionLink("Date", "AllAppointment", new
+                {
+                    sort = ViewBag.SortByDate,
+                    search = Request.QueryString["search"],
+                    ddl1 = Request.QueryString["ddl1"],
+                    ddl2 = Request.QueryString["ddl2"],
+                    ddl3 = Request.QueryString["ddl3"],
+                    date = Request.QueryString["date"]
+                })
+            </th>
+            <th>
+                Expense
+            </th>
+            <th>
+                @Html.ActionLink("Payment Method", "AllAppointment", new
+                {
+                    sort = ViewBag.SortByPayment,
+                    search = Request.QueryString["search"],
+                    ddl1 = Request.QueryString["ddl1"],
+                    ddl2 = Request.QueryString["ddl2"],
+                    ddl3 = Request.QueryString["ddl3"],
+                    date = Request.QueryString["date"]
+                })
+            </th>
+            <th>
+                @Html.ActionLink("Invoice Status", "AllAppointment", new
+                {
+                    sort = ViewBag.SortByIStatus,
+                    search = Request.QueryString["search"],
+                    ddl1 = Request.QueryString["ddl1"],
+                    ddl2 = Request.QueryString["ddl2"],
+                    ddl3 = Request.QueryString["ddl3"],
+                    date = Request.QueryString["date"]
+                })
+            </th>
+            <th>
+                @Html.ActionLink("Payment Status", "AllAppointment", new
+                {
+                    sort = ViewBag.SortByPStatus,
+                    search = Request.QueryString["search"],
+                    ddl1 = Request.QueryString["ddl1"],
+                    ddl2 = Request.QueryString["ddl2"],
+                    ddl3 = Request.QueryString["ddl3"],
+                    date = Request.QueryString["date"]
+                })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient_Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient_Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalInvoice_Date)
+                </td>
+                <td>
+                    $ @Html.DisplayFor(modelItem => item.MedicalInvoice_Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Invoice_Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payment_Status)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditAppointment", "Patients", new { id = item.MedicalInvoice_ID })" class="btn btn-info btn-sm">Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<div class="container-fluid">
+    <h6 style="color:#007BFF">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</h6>
+
+    @Html.PagedListPager(Model, pageNumber => Url.Action("AllAppointment", new
+    {
+        pageNumber,
+        search = Request.QueryString["search"],
+        ddl1 = Request.QueryString["ddl1"],
+        ddl2 = Request.QueryString["ddl2"],
+        ddl3 = Request.QueryString["ddl3"],
+        date = Request.QueryString["date"]
+    }),
+                 new PagedListRenderOptions
+                 {
+                     DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                     DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                     DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                     DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                     MaximumPageNumbersToDisplay = 3
+                 })
+</div>

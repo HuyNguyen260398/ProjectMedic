@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "TermOfService";
+    Layout = "~/Views/Layout/_CustomerLayout1.cshtml";
+}
+
+<section class="home-slider inner-page owl-carousel" id="contact-banner">
+    <div class="slider-item" style="background-image: url('../../Template/Medic/img/slider-2.jpg');">
+        <div class="container">
+            <div class="row slider-text align-items-center">
+                <div class="col-md-7 col-sm-12 element-animate">
+                    <h1>Term of Service</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@using (Html.BeginForm("TermOfService", "Home", FormMethod.Post))
+{
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 element-animate">
+                    <img src="~/Template/Medic/img/img_1.jpg" class="img-fluid mb-4" alt="Image placeholder">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5 element-animate">
+                    <h2 class="text-uppercase mb-4">Term of Service</h2>
+                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
+                    <p class="mb-5">Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
+                    <p>@Html.RadioButton("option", "angree") <text>I agree with the Term of Service</text></p>
+                    @if(ViewBag.Message != null)
+                    {
+                        <p><span class="text-danger">@ViewBag.Message</span></p>
+                    }
+                    <p><button class="btn btn-primary" type="submit">Continue</button></p>
+                </div>
+            </div>
+        </div>
+    </section>
+}

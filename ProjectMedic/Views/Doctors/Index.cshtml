@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjectMedic.Models.Doctor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Doctor List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor_Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Academic_Title.AcademicTitle_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medical_Specialty.MedicalSpecialty_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor_Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Academic_Title.AcademicTitle_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medical_Specialty.MedicalSpecialty_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Doctor_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Doctor_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Doctor_ID })
+        </td>
+    </tr>
+}
+
+</table>

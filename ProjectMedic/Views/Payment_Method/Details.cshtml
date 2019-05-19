@@ -1,0 +1,35 @@
+﻿@model ProjectMedic.Models.Payment_Method
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment_Method</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethod_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethod_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethod_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethod_Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PaymentMethod_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

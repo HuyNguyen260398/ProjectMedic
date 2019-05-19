@@ -1,0 +1,171 @@
+﻿@model ProjectMedic.Models.AdminLogin
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Login | Medi+ Admin Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Template/Admin/img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Template/Admin/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Template/Admin/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/normalize.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/main.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/Template/Admin/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/Template/Admin/css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/form/all-type-forms.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Template/Admin/css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body style="background-image: url(../../Template/Images/bvtanphu.jpg)">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="error-pagewrap">
+            <div class="error-page-int" style="background-color: white">
+                <div class="text-center m-b-md custom-login">
+                    <h3 style="color: #007BFF">SIGN IN TO MEDI +</h3>
+                    <p style="color: #007BFF">Medi+ App - Tan Phu Hospital</p>
+                </div>
+                <div class="content-error">
+                    <div class="hpanel">
+                        <div class="panel-body">
+                            <form action="#" id="loginForm">
+                                <div class="form-group">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Admin_Username, htmlAttributes: new { @class = "control-label", @for = "username" })
+                                    @Html.EditorFor(model => model.Admin_Username, new { htmlAttributes = new { @class = "form-control", @id = "username" } })
+                                    @Html.ValidationMessageFor(model => model.Admin_Username, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("UsernameError", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Admin_Password, htmlAttributes: new { @class = "control-label", @for = "password" })
+                                    @Html.EditorFor(model => model.Admin_Password, new { htmlAttributes = new { @class = "form-control", @id = "password" } })
+                                    @Html.ValidationMessageFor(model => model.Admin_Password, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("PasswordError", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.RememberMe)
+                                    @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @for = "rememberme" })
+                                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block loginbtn">Sign In</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center login-footer">
+                    <p>Copyright © 2018. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Colorlib</a></p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- jquery
+        ============================================ -->
+    <script src="~/Template/Admin/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Template/Admin/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Template/Admin/js/metisMenu/metisMenu-active.js"></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/tab.js"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/icheck/icheck.min.js"></script>
+    <script src="~/Template/Admin/js/icheck/icheck-active.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/Template/Admin/js/main.js"></script>
+    <!-- sign in validation
+        ============================================ -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+
+</body>
+
+</html>
+
